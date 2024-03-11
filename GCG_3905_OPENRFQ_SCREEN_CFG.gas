@@ -1,0 +1,40 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Coded BY SFF 7/24/2015
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,47610)
+	'Disable Email Button
+	F.Intrinsic.Variable.SetProperty(V.Passed.000129,"LOCK","True")
+F.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3905_OPENRFQ_SCREEN_CFG.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_OPENRFQ_SCREEN_CFG$}$SFF$}$7/24/2015 3:11:15 PM
+${$1$}$$}$$}$0$}$47610$}$POPULATE$}$7/24/2015 3:13:49 PM$}$(Program: PURA65V; Screen: PUSA65V)
+
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$GAB SCript blocks email button on populate hook of Open RFQ's screen hook 47610
+Program.Sub.Comments.End
+
